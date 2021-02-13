@@ -1,0 +1,38 @@
+
+
+/***********************/
+/*   Homepage Styles   */ 
+/***********************/
+
+.powerOff {
+  margin: 3rem;
+}
+
+.thermostatContainer {
+  display: flex; 
+  flex-direction: row; 
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 85%;
+  max-width: 1200px;
+}
+
+.temperatureDisplay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+
+.button {
+  color: var(--secondaryColour);
+}

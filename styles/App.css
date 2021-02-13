@@ -1,0 +1,108 @@
+/*********************/
+/*   Header Styles   */
+/*********************/
+header {
+  background-color: var(--primaryColour);
+  height: 100%;
+  padding: .5rem 1rem;
+}
+
+h1 {
+  color: #fff;
+}
+
+/***********************/
+/*   Homepage Styles   */
+/***********************/
+.powerOff {
+  margin: 3rem;
+}
+
+.thermostatContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0 auto;
+  width: 85%;
+  max-width: 1200px;
+}
+
+.temperatureDisplay {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 30%;
+}
+
+.buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 40%;
+}
+
+.button {
+  color: var(--secondaryColour);
+}
+
+/*********************/
+/*   Global Styles   */
+/*********************/
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.App {
+  text-align: center;
+  background-color: #fff;
+}
+
+h2, h3 {
+  color: var(--headers);
+}
+
+/*****************/
+/*   Variables   */
+/*****************/
+/* Colours */
+:root {
+  --primaryColour: #020e18;
+  --secondaryColour: #24bec9;
+  --supAccent: #e76043;
+  --supAccentTwo: #83d0d7;
+  --headers: #0b263c;
+}
+/*# sourceMappingURL=App.css.map */
