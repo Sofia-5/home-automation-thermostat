@@ -18,6 +18,8 @@ import Thermostat from '../Thermostat/Thermostat';
 // Restrictions: Thermostat cannot be set to cooling if the tempature outside is below 0 degrees celcius *
 // Checks: If thermostat is on automode and the current tempature in the room is above the desired temp set by user AND the current outisde tempature outside is below 0 degrees celcius, THEN thermostat goes to stand-by mode INSTEAD of cooling. 
 // Current tempature = average tempature (get three inputs and get average)
+const parityGoAPI = 'http://api-staging.paritygo.com/sensors/api/';
+const partityAPIRegister = `${parityGoAPI}thermostat/register/`
 
 class Homepage extends Component {
   constructor() {
@@ -26,12 +28,26 @@ class Homepage extends Component {
       indoorTemperature: null,
       outdoorTemperature: null,
       hiddenProp: true,
+      currentMode: '',
+      currentID: ''
     };
   }
 
+  
   componentDidMount() {
+    // API call for returning the hash of the UUID assigned to the thermostat
     axios({
-      url: 'http://api-staging.paritygo.com/sensors/api/sensors/',
+      url: partityAPIRegister,
+      method: "GET",
+      datatype: "json"
+    }).then((response) => {
+      const UUIDdata = response.data;
+  
+    })
+  
+    // API call for getting the data (indoor & outdoor temperature) from the sensor 
+    axios({
+      url: `${parityGoAPI}sensors/`,
       method: "GET",
       datatype: "json",
       params: {
@@ -62,15 +78,16 @@ class Homepage extends Component {
   }
 
   onTempChange = (mode) => {
-    this.setState({
+    this.setState ({
+      currentMode: mode
+    });
   
-    })
-   
+    // API call to set desired mode and append the user UUID 
     axios({
-      url: 'http://api-staging.paritygo.com/sensors/api/thermostat/dc5439cea49b4eccacadd3be7ef42b11',
-      method: "GET",
+      url: 'http://api-staging.paritygo.com/sensors/api/thermostat/dc5439cea49b4eccacadd3be7ef42b11/',
+      method: "PATCH",
       datatype: "json",
-      params: {
+      data: {
         state: mode
       },
     }).then((response) =>{
@@ -78,40 +95,79 @@ class Homepage extends Component {
           
       const data = response.data;
       console.log(data);
-
+      console.log(this.state.currentMode)
     });
   }
-
-
   
   onDesiredInput = (mode) => {
-    console.log(this.state.hiddenProp);
-
     this.setState({
-      hiddenProp : this.state.hiddenProp= false
+      hiddenProp: this.state.hiddenProp= !this.state.hiddenProp,
+      currentMode: mode
     })
-    
   }
-
 
   render() {
     return (
       <div className="homepageContainer">
-          <div className="powerOff">
-            <button className="offButton" onClick= {(e)=>this.onTempChange('off')}>Off</button>
-            <button className="onButton" onClick= {(e)=>this.onTempChange('On')}>On</button>
+          <div className="power">
+            <button 
+              className="offButton" 
+              onClick= {()=>this.onTempChange('off')}
+              >
+              Off
+            </button>
+            <button 
+              className="onButton" 
+              onClick= {()=>this.onTempChange('on')}
+              >
+              On
+            </button>
           </div>
         <div className="thermostatContainer"> 
-          <div className="tempatureDisplay">
+          <div className="temperatureDisplay">
             {/* need two states, one for outdoor and one for indoor temp  */}
-            <h2>Indoor Temperature:</h2><Thermostat hiddenProp={this.state.hiddenProp}   indoorTemperature = { this.state.indoorTemperature }/> 
+
+            <Thermostat 
+              hiddenProp={ this.state.hiddenProp }   
+              onDesiredInput={ this.onDesiredInput } 
+              indoorTemperature={ this.state.indoorTemperature } 
+              mode={ this.state.currentMode }
+            /> 
           </div>
           <div className="buttons">
-            <button className="heatButton" onClick= {(e)=>this.onDesiredInput('heat')}>Heating Mode</button>
-            <button className="coolButton" onClick= {(e)=>this.onDesiredInput('cool')}>Cooling Mode</button>
-            <button className="autoHeatButton" onClick= {(e)=>this.onTempChange('auto_heat')}>Auto Heat</button>
-            <button className="autoCoolButton" onClick= {(e)=>this.onTempChange('auto_cool')}>Auto Cool</button>
-            <button className="autoStandbyButton" onClick= {(e)=>this.onTempChange('Auto_standby')}>Stand By</button>
+            <button 
+              className="heatButton"  
+              onClick= {()=>this.onDesiredInput('heat')}
+              >
+              Heating Mode
+            </button>
+            <button 
+              className="coolButton" 
+              onClick= {()=>this.onDesiredInput('cool')}
+              >
+              Cooling Mode
+            </button>
+            <button 
+              className="autoHeatButton" 
+              onClick= {()=>this.onTempChange('auto_heat')}
+              mode={this.state.currentMode}
+              >
+              Auto Heat
+            </button>
+            <button 
+              className="autoCoolButton" 
+              onClick= {()=>this.onTempChange('auto_cool')}
+              mode={this.state.currentMode}
+              >
+              Auto Cool
+            </button>
+            <button 
+              className="autoStandbyButton" 
+              onClick= {()=>this.onTempChange('Auto_standby')}
+              mode={this.state.currentMode}
+              >
+              Stand By
+            </button>
           </div>
         </div>
 

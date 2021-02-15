@@ -1,3 +1,7 @@
+/***********************/
+/*   DesiredTemp Styles   */ 
+/***********************/
+
 .inputTempShow {
   display: block;
 }
@@ -6,3 +10,20 @@
   display: none;
 }
 
+input {
+  border-radius: 5px;
+  margin: 0.5rem;
+  width: 5rem;
+  padding: 1.1rem;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.container .submit {
+  width: 5rem;
+  margin: 0.5rem;
+}

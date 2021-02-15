@@ -16,10 +16,15 @@ class Thermostat extends Component {
   
   render() {
     return (
-    <div> 
+    <div className="thermostateContainer"> 
+      <h2>Indoor Temperature:</h2>
       { this.props.indoorTemperature }
       { this.props.outdoorTemperature }
-      <DesiredTemp hiddenProp/>
+      <DesiredTemp 
+        hiddenProp={ this.props.hiddenProp } 
+        onDesiredInput={ this.props.onDesiredInput } 
+        mode={ this.props.mode }
+      />
     </div>
     )
   } 

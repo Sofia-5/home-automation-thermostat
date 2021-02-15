@@ -1,5 +1,3 @@
-
-
 /***********************/
 /*   Homepage Styles   */ 
 /***********************/
@@ -11,28 +9,58 @@
 .thermostatContainer {
   display: flex; 
   flex-direction: row; 
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin: 0 auto;
-  width: 85%;
+  width: 100%;
   max-width: 1200px;
 }
 
 .temperatureDisplay {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  width: 30%;
+  width: 45%;
+  margin: 2rem 0;
+  padding: 0 2rem 0 8rem;
+}
+
+button {
+  border-radius: 5px;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  width: 10rem;
+  font-size: 1rem;
+  font-weight: 200;
+}
+
+.power button {
+  width: 5rem;
+  margin: 1rem 0.5rem;
 }
 
 .buttons {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  width: 40%;
+  width: 45%;
+  padding: 0 8rem 0 2rem;
 }
 
-.button {
+
+.heatButton {
+  background-color: var(--supAccent);
+}
+
+.coolButton {
+  background-color: var(--supAccentTwo);
+}
+
+.autoHeatButton {
+  color: var(--supAccent);
+}
+
+.autoCoolButton {
   color: var(--secondaryColour);
 }
