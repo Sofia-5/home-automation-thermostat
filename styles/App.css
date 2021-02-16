@@ -11,10 +11,6 @@ h1 {
   color: #fff;
 }
 
-h2 {
-  font-size: 1rem;
-}
-
 /***********************/
 /*   Homepage Styles   */
 /***********************/
@@ -34,7 +30,7 @@ h2 {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   margin: 0 auto;
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
 }
 
@@ -170,8 +166,18 @@ code {
   background-color: #fff;
 }
 
+.wrapper {
+  margin: 0 auto;
+  width: 80%;
+  max-width: 1200px;
+}
+
 h2, h3 {
   color: var(--headers);
+}
+
+h2 {
+  font-size: 1.5rem;
 }
 
 /*****************/

@@ -16,10 +16,19 @@ input {
   padding: 1.1rem;
 }
 
+.inputError {
+  color: red;
+  margin-top: 1.5rem;
+}
+
 .container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;

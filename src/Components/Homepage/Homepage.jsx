@@ -26,8 +26,8 @@ class Homepage extends Component {
       indoorTemperature: null,
       outdoorTemperature: null,
       hiddenProp: true,
-      currentMode: '',
-      currentID: ''
+      currentMode: " ",
+      currentID: " ",
     };
   }
 
@@ -97,10 +97,10 @@ class Homepage extends Component {
     });
   }
   
-  onDesiredInput = (mode) => {
+  onDesiredInput = () => {
     this.setState({
       hiddenProp: this.state.hiddenProp= !this.state.hiddenProp,
-      currentMode: mode
+      
     })
   }
 
@@ -117,7 +117,7 @@ class Homepage extends Component {
 
   coolMode = () => {
     if(this.state.outdoorTemperature > 0){
-      this.onDesiredInput('cool');
+      this.onDesiredInput();
       this.onTempChange('cool')
     }
   }
