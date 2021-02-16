@@ -18,7 +18,7 @@ class Thermostat extends Component {
     return (
     <div className="thermostateContainer"> 
       <h2>Indoor Temperature:</h2>
-      { this.props.indoorTemperature }
+      { this.props.indoorTemperature } <span>&#8451;</span>
       { this.props.outdoorTemperature }
       <DesiredTemp 
         hiddenProp={ this.props.hiddenProp } 

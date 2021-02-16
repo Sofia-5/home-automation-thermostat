@@ -1,8 +1,6 @@
-
 import React, { Component } from 'react';
 import axios from "axios";
 import Thermostat from '../Thermostat/Thermostat'; 
-
 
 // A. Need to make media Queries to make it responsive on mobile
 // B. Not sure 
@@ -19,7 +17,7 @@ import Thermostat from '../Thermostat/Thermostat';
 // Checks: If thermostat is on automode and the current tempature in the room is above the desired temp set by user AND the current outisde tempature outside is below 0 degrees celcius, THEN thermostat goes to stand-by mode INSTEAD of cooling. 
 // Current tempature = average tempature (get three inputs and get average)
 const parityGoAPI = 'http://api-staging.paritygo.com/sensors/api/';
-const partityAPIRegister = `${parityGoAPI}thermostat/register/`
+// const partityAPIRegister = `${parityGoAPI}thermostat/register/`
 
 class Homepage extends Component {
   constructor() {
@@ -36,14 +34,14 @@ class Homepage extends Component {
   
   componentDidMount() {
     // API call for returning the hash of the UUID assigned to the thermostat
-    axios({
-      url: partityAPIRegister,
-      method: "GET",
-      datatype: "json"
-    }).then((response) => {
-      const UUIDdata = response.data;
+    // axios({
+    //   url: partityAPIRegister,
+    //   method: "GET",
+    //   datatype: "json"
+    // }).then((response) => {
+    //   const UUIDdata = response.data;
   
-    })
+    // })
   
     // API call for getting the data (indoor & outdoor temperature) from the sensor 
     axios({
@@ -65,7 +63,7 @@ class Homepage extends Component {
       data.forEach(element => {
         if (element.name === "Temperature 1") {
           this.setState ( {
-            indoorTemperature: element.latest_value
+            indoorTemperature: Math.round(element.latest_value).toFixed(1) 
           })
         } else if (element.name === "Outdoor 1") {
           this.setState ({
@@ -106,27 +104,43 @@ class Homepage extends Component {
     })
   }
 
+
+  //Checks: If thermostat is on automode and the current tempature in the room is above the desired temp set by user AND the current outisde tempature outside is below 0 degrees celcius, THEN thermostat goes to stand-by mode INSTEAD of cooling.
+  
+  // standbyMode(){
+  //   console.log(this.state.mode)
+  //   if(this.state.outdoorTemperature > 0 && this.state.mode == 'auto_heat'){
+  //     this.onDesiredInput('auto_standby')
+  //     this.onTempChange('auto_standby')
+  //     }
+  // }
+
+  coolMode = () => {
+    if(this.state.outdoorTemperature > 0){
+      this.onDesiredInput('cool');
+      this.onTempChange('cool')
+    }
+  }
+
   render() {
     return (
       <div className="homepageContainer">
-          <div className="power">
-            <button 
-              className="offButton" 
-              onClick= {()=>this.onTempChange('off')}
-              >
-              Off
-            </button>
-            <button 
-              className="onButton" 
-              onClick= {()=>this.onTempChange('on')}
-              >
-              On
-            </button>
-          </div>
+        <div className="power">
+          <button 
+            className="offButton" 
+            onClick= {()=>this.onTempChange('off')}
+            >
+            Off
+          </button>
+          <button 
+            className="onButton" 
+            onClick= {()=>this.onTempChange('on')}
+            >
+            On
+          </button>
+        </div>
         <div className="thermostatContainer"> 
           <div className="temperatureDisplay">
-            {/* need two states, one for outdoor and one for indoor temp  */}
-
             <Thermostat 
               hiddenProp={ this.state.hiddenProp }   
               onDesiredInput={ this.onDesiredInput } 
@@ -139,14 +153,17 @@ class Homepage extends Component {
               className="heatButton"  
               onClick= {()=>this.onDesiredInput('heat')}
               >
-              Heating Mode
+              <i class="fas fa-fire" id="heatIcon"></i>
+              Heat Mode
             </button>
             <button 
               className="coolButton" 
-              onClick= {()=>this.onDesiredInput('cool')}
+              onClick= {()=>this.coolMode()}
               >
-              Cooling Mode
+              <i class="fas fa-snowflake" id="heatIcon"></i>
+              Cool Mode
             </button>
+          
             <button 
               className="autoHeatButton" 
               onClick= {()=>this.onTempChange('auto_heat')}
@@ -163,7 +180,7 @@ class Homepage extends Component {
             </button>
             <button 
               className="autoStandbyButton" 
-              onClick= {()=>this.onTempChange('Auto_standby')}
+              onClick= {()=>this.onTempChange('auto_standby')}
               mode={this.state.currentMode}
               >
               Stand By

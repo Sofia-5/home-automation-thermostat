@@ -17,6 +17,10 @@ input {
   padding: 1.1rem;
 }
 
+.inputError {
+  color: red;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -24,6 +28,12 @@ input {
 }
 
 .container .submit {
-  width: 5rem;
+  width: 6rem;
   margin: 0.5rem;
+  text-align: center;
+}
+
+.submit:hover {
+  background-color: #FBBC02;
+  border: 1px solid var(--primaryColour);
 }

@@ -7,16 +7,39 @@ class DesiredTemp extends Component {
     super(props);
     this.state = {
       desiredTemp: '',
-      hiddenProps: true
+      hiddenProps: true,
+      inputError: 'Enter your desired temperature value'
     };
   }
 
   captureTemp = (e) => {
-    this.setState({ desiredTemp: e.target.value}) 
+    // e.preventDefault();
+    // if (!value) {
+    //   return <div>{this.setState.error}</div>;
+    // } 
+    // return 
+    this.setState ({desiredTemp: e.target.value});
+  };
+
+  validate = () => {
+    let inputError = 'Enter your desired temperature value';
   }
+
+
+    // const {value} = e.target;
+    // let errors = this.state.errors;
+    // switch (value) { case value = value.length > 1 ? 'Enter your desired temperature value' : this.setState(desiredTemp: e.target.value)};
+    // this.setState(error(value))
+
+    // error handling for accepting only integers 
+  
 
   triggerApiCall =(e)=>{
     this.props.onDesiredInput(e);
+    const isValid = this.validate();
+    if (isValid) {
+      console.log(this.state)
+    }
     this.setState({
       hiddenProps : this.state.hiddenProps= !this.state.hiddenProps
     })
@@ -26,7 +49,8 @@ class DesiredTemp extends Component {
       method: "PATCH",
       datatype: "json",
       data: {
-        state: this.props.mode
+        state: this.props.mode,
+        newTemp: this.state.desiredTemp
       },
     }).then((response) =>{
           console.log(response);
@@ -39,26 +63,30 @@ class DesiredTemp extends Component {
   render() {
     return (
       <div className="container">
-        <div  className = { this.props.hiddenProp ? 'inputTempHidden' : 'inputTempShow' } >
-          <label htmlFor="desiredTempInputField"></label>
-          <input 
-            type="text" 
-            id="desiredTempInputField" 
-            onChange={(e)=> this.captureTemp(e)}
-          />
-          <button 
-            className="submit" 
-            onClick= {(e)=> this.triggerApiCall(e)}
-            >
-            Submit
-          </button>
-        </div>
         <div>
           <label  
             className= { this.state.hiddenProps ? 'inputTempHidden' : 'inputTempShow' } 
             htmlFor="setTemp"> Desired temperature is set to: { this.state.desiredTemp }
           </label>
         </div>
+        <form className = { this.props.hiddenProp ? 'inputTempHidden' : 'inputTempShow' } >
+          <label htmlFor="desiredTempInputField"></label>
+          <input 
+            type="number" 
+            maxlength="2" 
+            minlength="1" 
+            required
+            id="desiredTempInputField" 
+            onChange={(e)=> this.captureTemp(e)}
+          />
+          <div className="inputError">{this.state.inputError}</div> 
+          <button 
+            className="submit" 
+            onClick= {(e)=> this.triggerApiCall(e)}
+            >
+            Submit
+          </button>
+        </form>
       </div>
     )
   }

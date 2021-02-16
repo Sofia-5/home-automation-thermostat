@@ -11,7 +11,7 @@
   flex-direction: row; 
   justify-content: space-evenly;
   margin: 0 auto;
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
 }
 
@@ -31,12 +31,24 @@ button {
   padding: 1rem;
   width: 10rem;
   font-size: 1rem;
-  font-weight: 200;
+  font-weight: bold;
+  border: 1px solid transparent;
+  transition: all .3s ease-in;
 }
+
+button:hover {
+  cursor: pointer;
+}
+
 
 .power button {
   width: 5rem;
   margin: 1rem 0.5rem;
+}
+
+.power button:hover {
+  background-color: #FBBC02;
+  border: 1px solid var(--primaryColour);
 }
 
 .buttons {
@@ -46,21 +58,46 @@ button {
   align-items: center;
   width: 45%;
   padding: 0 8rem 0 2rem;
+  
 }
 
+.fas {
+  padding: 0 0.5rem 0 0 ;
+}
 
+.fa-fire {
+  color: #FBBC02;
+}
 .heatButton {
   background-color: var(--supAccent);
 }
+.heatButton:hover {
+  background-color: #E99F8F;
+  border: 1px solid var(--primaryColour);
+}
 
+.fa-snowflake {
+  color: white;
+}
 .coolButton {
+  background-color: var(--secondaryColour);
+}
+.coolButton:hover {
   background-color: var(--supAccentTwo);
+  border: 1px solid var(--primaryColour);
 }
 
-.autoHeatButton {
-  color: var(--supAccent);
+.autoHeatButton:hover {
+  background-color: #E99F8F;
+  border: 1px solid var(--primaryColour);
+}
+.autoCoolButton:hover {
+  background-color: var(--supAccentTwo);
+  border: 1px solid var(--primaryColour);
 }
 
-.autoCoolButton {
-  color: var(--secondaryColour);
+.autoStandbyButton:hover {
+  background-color: #FBBC02;
+  border: 1px solid var(--primaryColour);
 }
+
